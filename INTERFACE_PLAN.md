@@ -32,3 +32,4 @@ This project is a simple interface in which we will make an example of an MCP se
 ## Documentation
 - https://coinmarketcap.com/api/documentation/v1/
 - https://modelcontextprotocol.io/quickstart/server
+- https://docs.astral.sh/uv/
