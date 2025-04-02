@@ -1,40 +1,45 @@
-https://coinmarketcap.com/
-"""System resources for the MCP server."""
+"""System resources for the MCP server.
+
+Reference: https://coinmarketcap.com/
+"""
 
 import logging
-from typing import List
-
-from ..services import get_cryptocurrency_data
+import os
+from pathlib import Path
 
 # Configure logging
 logger = logging.getLogger(__name__)
 
 
 def register_resources(server):
-    """
-    Register all system resources with the server.
+    """Register all system resources with the server.
 
     Args:
         server: MCP server instance
     """
 
-    @server.resource("file://assets/coinmarketcap-docs.txt")
-    def get_file_docs() -> list[str]:
-        """
-        Get cryptocurrency data.
+    @server.resource(
+        "template://assets/{folder}/{file}",
+        description="resource template",
+    )
+    def get_file_docs(
+        folder: str = "docs", file: str = "coinmarketcap-docs.txt"
+    ) -> str:
+        """Get cryptocurrency data.
 
         Returns:
-            List of formatted cryptocurrency data
+            Formatted cryptocurrency data
         """
-        with open('assets/coinmarketcap-docs.txt', 'r') as f:
-            return [f.read()]
+        project_root = Path(os.path.dirname(os.path.abspath(__file__))).parent.parent
+        file_path = os.path.join(project_root, "assets", folder, file)
+        with open(file_path, "r") as f:
+            return f.read()
 
     @server.resource("https://coinmarketcap.com/")
-    def get_coinmarketcap_http_resource() -> list[str]:
-        """
-        Get cryptocurrency data.
+    def get_coinmarketcap_http_resource() -> str:
+        """Get cryptocurrency data.
 
         Returns:
-            List of formatted cryptocurrency data
+            Formatted cryptocurrency data
         """
-        return ['https://coinmarketcap.com/']
+        return "https://coinmarketcap.com/"
