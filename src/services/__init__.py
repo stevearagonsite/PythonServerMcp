@@ -1,0 +1,1 @@
+from .coinmarketcap_service import get_cryptocurrency_data

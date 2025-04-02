@@ -1,9 +1,12 @@
-#!/usr/bin/env python3
+"""Main entry point for the weather MCP server."""
 
-from src import main
+from src.weather import main as server_main
+
+
+def main():
+    """Run the weather MCP server."""
+    server_main()
+
 
 if __name__ == "__main__":
-    # Get the server instance
-    server = main()
-    # Run the MCP server
-    server.run(transport="stdio")
+    main()

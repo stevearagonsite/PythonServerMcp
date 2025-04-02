@@ -13,13 +13,19 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 # Copy all files
 COPY ./src ./src
+COPY ./assets ./assets
 COPY main.py ./main.py
 
 # Sync the project
 RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
     uv sync --frozen --no-editable
 
 FROM python:3.12-slim
+
+# Set the working directory
+WORKDIR /app
 
 # Set the time zone
 ENV TZ=America/Argentina/Buenos_Aires
@@ -33,11 +39,14 @@ RUN apt-get update && \
     ffmpeg && \
     rm -rf /var/lib/apt/lists/*
 
-# Copy the environment, but not the source code
+# Copy the environment and source code
 COPY --from=builder --chown=app:app /app/.venv /app/.venv
+COPY --from=builder --chown=app:app /app/src /app/src
+COPY --from=builder --chown=app:app /app/main.py /app/main.py
 
 # Copy start script
 COPY start.sh ./start.sh
+COPY .env ./.env
 RUN chmod +x ./start.sh
 
 # Run start script

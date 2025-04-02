@@ -1,7 +1,7 @@
 from .base import BaseAppSettings
-from pydantic import SettingsConfigDict
+from pydantic_settings import SettingsConfigDict
 
 
-class StagingAppSettings(BaseAppSettings):
+class ProductionAppSettings(BaseAppSettings):
     pass
     model_config = SettingsConfigDict(env_file=".prod.env")

@@ -124,12 +124,6 @@ wheels = [
 ]
 
 [[package]]
-name = "decouple"
-version = "0.0.7"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/6c/e3/f70681dd89a96a701f22055caedc79cf88cebdeac9df827a5720bca80278/decouple-0.0.7.tar.gz", hash = "sha256:c253c1cc62b76e9720a066f334552548c6de1884bc3bdf456ddb62d61b867b09", size = 3324 }
-
-[[package]]
 name = "executing"
 version = "2.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -382,6 +376,15 @@ wheels = [
 ]
 
 [[package]]
+name = "python-decouple"
+version = "3.8"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/e1/97/373dcd5844ec0ea5893e13c39a2c67e7537987ad8de3842fe078db4582fa/python-decouple-3.8.tar.gz", hash = "sha256:ba6e2657d4f376ecc46f77a3a615e058d93ba5e465c01bbe57289bfb7cce680f", size = 9612 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a2/d4/9193206c4563ec771faf2ccf54815ca7918529fe81f6adb22ee6d0e06622/python_decouple-3.8-py3-none-any.whl", hash = "sha256:d0d45340815b25f4de59c974b855bb38d03151d81b037d9e3f463b0c9f8cbd66", size = 9947 },
+]
+
+[[package]]
 name = "python-dotenv"
 version = "1.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -395,27 +398,32 @@ name = "python-server-mcp"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "black" },
-    { name = "decouple" },
     { name = "httpx" },
-    { name = "icecream" },
     { name = "mcp", extra = ["cli"] },
     { name = "pydantic" },
     { name = "pydantic-settings" },
     { name = "python-coinmarketcap" },
+    { name = "python-decouple" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "black" },
+    { name = "icecream" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "black", specifier = ">=25.1.0" },
-    { name = "decouple", specifier = ">=0.0.7" },
+    { name = "black", marker = "extra == 'dev'", specifier = ">=25.1.0" },
     { name = "httpx", specifier = ">=0.28.1" },
-    { name = "icecream", specifier = ">=2.1.4" },
+    { name = "icecream", marker = "extra == 'dev'", specifier = ">=2.1.4" },
     { name = "mcp", extras = ["cli"], specifier = ">=1.6.0" },
     { name = "pydantic", specifier = ">=2.11.1" },
     { name = "pydantic-settings", specifier = ">=2.8.1" },
     { name = "python-coinmarketcap", specifier = ">=0.6" },
+    { name = "python-decouple", specifier = ">=3.8" },
 ]
+provides-extras = ["dev"]
 
 [[package]]
 name = "requests"

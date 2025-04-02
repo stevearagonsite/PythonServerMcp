@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Commit message file
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+# Only proceed if it's not a merge commit or similar
+if [ "$COMMIT_SOURCE" != "message" ]; then
+  exit 0
+fi
+
+# Make sure the script can read from the terminal
+INPUT_DEVICE="/dev/tty"
+
+# Ask for the AI assistance level
+echo "Select the AI assistance level:" >$INPUT_DEVICE
+echo "  h - [high-ai-assisted]" >$INPUT_DEVICE
+echo "  m - [medium-ai-assisted]" >$INPUT_DEVICE
+echo "  l - [low-ai-assisted]" >$INPUT_DEVICE
+
+# Read the user's input from the correct device
+read -p "Enter the corresponding letter (h/m/l): " LEVEL <$INPUT_DEVICE
+
+# Determine the tag based on the input
+case $LEVEL in
+  h)
+    TAG="[high-ai-assisted]"
+    ;;
+  m)
+    TAG="[medium-ai-assisted]"
+    ;;
+  l)
+    TAG="[low-ai-assisted]"
+    ;;
+  *)
+    echo "Invalid option. Commit canceled." >$INPUT_DEVICE
+    exit 1
+    ;;
+esac
+
+# Remove the last newline and add the tag
+tr -d '\n' < "$COMMIT_MSG_FILE" > temp && mv temp "$COMMIT_MSG_FILE"
+echo $TAG >> $COMMIT_MSG_FILE

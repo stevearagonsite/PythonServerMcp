@@ -1,5 +1,5 @@
 from .base import BaseAppSettings
-from pydantic import SettingsConfigDict
+from pydantic_settings import SettingsConfigDict
 
 
 class DevelopmentAppSettings(BaseAppSettings):

@@ -1,6 +1,9 @@
 .vscode
 .windsurfrules
 
+# Coverage
+.coverage
+
 # Environment variables
 .env
 .env.local

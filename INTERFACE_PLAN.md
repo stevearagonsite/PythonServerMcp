@@ -6,27 +6,30 @@ This project is a simple interface in which we will make an example of an MCP se
 ```
 .
 ├── main.py
-└── src
-    ├── __init__.py
-    └── core
-        ├── common
-        │   └── schema.py
-        ├── config.py
-        ├── settings
-        │   ├── __init__.py
-        │   ├── base.py
-        │   ├── development.py
-        │   ├── environment.py
-        │   ├── local.py
-        │   ├── production.py
-        │   └── staging.py
-        └── utils
-            ├── datetime.py
-            ├── extended_enum.py
-            ├── filename_generator.py
-            ├── passwords.py
-            ├── query_utils.py
-            └── redis.py
+├── src
+│   ├── __init__.py
+│   └── core
+│       ├── common
+│       │   ├── crypto_schema.py
+│       │   └── schema.py
+│       ├── config.py
+│       ├── settings
+│       │   ├── __init__.py
+│       │   ├── base.py
+│       │   ├── development.py
+│       │   ├── environment.py
+│       │   ├── local.py
+│       │   ├── production.py
+│       │   └── staging.py
+│       └── utils
+│           ├── coinmarketcap.py
+│           ├── datetime.py
+│           ├── extended_enum.py
+│           ├── filename_generator.py
+│           ├── passwords.py
+│           ├── query_utils.py
+│           └── redis.py
+└── test_mcp.py
 ```
 
 ## Documentation

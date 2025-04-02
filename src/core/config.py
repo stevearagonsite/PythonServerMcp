@@ -1,13 +1,13 @@
 from functools import lru_cache
 
-from app.core.settings.base import BaseAppSettings
+from src.core.settings.base import BaseAppSettings
 
-from .settings import (
+from src.core.settings import (
     Environment,
     LocalAppSettings,
     DevelopmentAppSettings,
     StagingAppSettings,
-    ProdAppSettings,
+    ProductionAppSettings,
 )
 
 import decouple
@@ -25,7 +25,7 @@ class SettingsFactory:
             Environment.LOCAL: LocalAppSettings,
             Environment.DEV: DevelopmentAppSettings,
             Environment.STAGING: StagingAppSettings,
-            Environment.PROD: ProdAppSettings,
+            Environment.PROD: ProductionAppSettings,
         }.get(self.environment, LocalAppSettings)()
 
 

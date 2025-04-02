@@ -9,6 +9,7 @@ from .environment import Environment
 
 class BaseAppSettings(BaseSettings):
     ENVIRONMENT: Environment
+    NAME: str = "python-server-mcp"
 
     # APP PATH
     PROJECT_ROOT: str = os.path.abspath(
@@ -32,11 +33,9 @@ class BaseAppSettings(BaseSettings):
     MAX_PAGE_SIZE: int = 100
     ORDERING: str = "-created_at"
 
-    # SALESFORCE
-    SALESFORCE_USERNAME: str
-    SALESFORCE_PASSWORD: str
-    SALESFORCE_SECURITY_TOKEN: str
-    ENVIRONMENT_SF: str
+    # COINMARKETCAP API
+    COINMARKETCAP_API_KEY: str = ""
+    COINMARKETCAP_API_URL: str = "https://pro-api.coinmarketcap.com/v1"
 
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -45,6 +44,12 @@ class BaseAppSettings(BaseSettings):
         validate_assignment=True,
         extra="allow",
     )
+
+    # SALESFORCE
+    # SALESFORCE_USERNAME: str
+    # SALESFORCE_PASSWORD: str
+    # SALESFORCE_SECURITY_TOKEN: str
+    # ENVIRONMENT_SF: str
 
     # CORS
     # ALLOWED_HOSTS: list[str] = ["localhost", "127.0.0.1"]
