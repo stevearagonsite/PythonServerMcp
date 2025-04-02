@@ -7,7 +7,7 @@ from src.resources import register_all_resources
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(settings.NAME)
+logger = logging.getLogger(__name__)
 
 
 def create_server(name=settings.NAME):

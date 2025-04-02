@@ -21,11 +21,14 @@ class SettingsFactory:
         self.environment = environment
 
     def __call__(self) -> BaseAppSettings:
+        # Handle both PROD and PRODUCTION for production environment
+        if self.environment in [Environment.PROD, "PRODUCTION"]:
+            return ProductionAppSettings()
+        
         return {
             Environment.LOCAL: LocalAppSettings,
             Environment.DEV: DevelopmentAppSettings,
             Environment.STAGING: StagingAppSettings,
-            Environment.PROD: ProductionAppSettings,
         }.get(self.environment, LocalAppSettings)()
 
 

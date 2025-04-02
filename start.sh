@@ -4,4 +4,4 @@
 source .venv/bin/activate
 
 # Run the MCP server
-python main.py
+python ./server.py

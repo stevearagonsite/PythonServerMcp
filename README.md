@@ -2,6 +2,38 @@
 
 This project implements an MCP (Model Context Protocol) server that provides cryptocurrency price information. The server is built using Python and the MCP framework to create an API that can be consumed by different clients.
 
+## Docker
+
+Docker build:
+`docker build -t mcp/python-server-mcp -f Dockerfile .`
+
+Add the following to your `mcp.json` file:
+```
+{
+  "mcpServers": {
+    "python-server-mcp": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-p",
+        "8000:8000",
+        "-e",
+        "ENVIRONMENT",
+        "-e",
+        "COINMARKETCAP_API_KEY",
+        "mcp/python-server-mcp"
+      ],
+      "env": {
+        "ENVIRONMENT": "PRODUCTION",
+        "COINMARKETCAP_API_KEY": "your-api-key",
+      }
+    }
+  }
+}
+```
+
 ## Features
 
 - Real-time cryptocurrency price retrieval
@@ -72,18 +104,40 @@ docker run -it test-mcp
 
 ```
 .
-├── Dockerfile          # Docker configuration
-├── main.py             # Application entry point
-├── pyproject.toml      # Dependencies configuration
-├── start.sh            # Docker startup script
-└── src/                # Source code
-    ├── __init__.py     # MCP server initialization
-    └── core/           # Core modules
-        ├── common/     # Shared schemas and models
-        ├── config.py   # Application configuration
-        ├── services/   # Application services
-        ├── settings/   # Environment-specific settings
-        └── utils/      # Utilities
+├── main.py
+└── src
+    ├── __init__.py
+    ├── core
+    │   ├── common
+    │   │   ├── crypto_schema.py
+    │   │   └── schema.py
+    │   ├── config.py
+    │   ├── settings
+    │   │   ├── __init__.py
+    │   │   ├── base.py
+    │   │   ├── development.py
+    │   │   ├── environment.py
+    │   │   ├── local.py
+    │   │   ├── production.py
+    │   │   └── staging.py
+    │   └── utils
+    │       ├── datetime.py
+    │       ├── extended_enum.py
+    │       ├── filename_generator.py
+    │       ├── passwords.py
+    │       ├── query_utils.py
+    │       └── redis.py
+    ├── mcp_server.py
+    ├── resources
+    │   ├── __init__.py
+    │   └── coinmarketcap_resource.py
+    ├── server.py
+    ├── services
+    │   ├── __init__.py
+    │   └── coinmarketcap_service.py
+    └── tools
+        ├── __init__.py
+        └── prices.py
 ```
 
 ## Development

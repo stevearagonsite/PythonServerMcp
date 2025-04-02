@@ -14,7 +14,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # Copy all files
 COPY ./src ./src
 COPY ./assets ./assets
-COPY main.py ./main.py
+COPY server.py ./server.py
 
 # Sync the project
 RUN --mount=type=cache,target=/root/.cache/uv \
@@ -42,12 +42,17 @@ RUN apt-get update && \
 # Copy the environment and source code
 COPY --from=builder --chown=app:app /app/.venv /app/.venv
 COPY --from=builder --chown=app:app /app/src /app/src
-COPY --from=builder --chown=app:app /app/main.py /app/main.py
+COPY --from=builder --chown=app:app /app/server.py /app/server.py
+
+# Create environment files if they don't exist
+RUN touch /app/.env
+RUN touch /app/.dev.env
+RUN touch /app/.staging.env
+RUN touch /app/.prod.env
 
 # Copy start script
 COPY start.sh ./start.sh
-COPY .env ./.env
 RUN chmod +x ./start.sh
 
 # Run start script
-CMD ["./start.sh"]
+ENTRYPOINT ["./start.sh"]

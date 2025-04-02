@@ -1,6 +1,6 @@
 """Main entry point for the weather MCP server."""
 
-from src.weather import main as server_main
+from src import main as server_main
 
 
 def main():
