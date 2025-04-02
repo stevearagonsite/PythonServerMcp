@@ -1,5 +1,5 @@
 # TO DO
-- [ ] bootstrap project
-- [ ] integrate coinmarketcap api
+- [x] bootstrap project
+- [x] integrate coinmarketcap api
 - [ ] create dockerfile
 - [ ] create docker-compose file
