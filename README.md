@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/stevearagonsite-pythonservermcp-badge.png)](https://mseep.ai/app/stevearagonsite-pythonservermcp)
+
 # Python Server MCP - Cryptocurrency Price Service
 
 This project implements an MCP (Model Context Protocol) server that provides cryptocurrency price information. The server is built using Python and the MCP framework to create an API that can be consumed by different clients.
